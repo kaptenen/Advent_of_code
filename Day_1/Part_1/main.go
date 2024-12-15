@@ -16,7 +16,7 @@ func diff(a, b int) int{
 }
 
 func main(){
-	file, osErr := os.Open("input.txt")
+	file, osErr := os.Open("../input.txt")
 
     if osErr != nil {
         fmt.Print(osErr)
@@ -51,5 +51,5 @@ func main(){
         totalDiff += difference
     }
 
-    fmt.Print(totalDiff)
+    fmt.Println(totalDiff)
 }

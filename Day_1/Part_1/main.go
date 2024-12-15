@@ -27,8 +27,7 @@ func main(){
     scanner := bufio.NewScanner(file)
     scanner.Split(bufio.ScanLines)
 
-    var leftSlice []int
-    var rightSlice []int
+    var leftSlice, rightSlice []int
 
     for scanner.Scan() {
         line := scanner.Text()

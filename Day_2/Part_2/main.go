@@ -19,22 +19,22 @@ func isValidLine(seq []int) bool {
 	isIncreasing := seq[0] < seq[1]
 
 	for i := 0; i < len(seq)-1; i++ {
-        curr, next := seq[i], seq[i+1]
+		curr, next := seq[i], seq[i+1]
 
-        if curr == next || diff(curr, next) > 3 {
-            return false
-        }
+		if curr == next || diff(curr, next) > 3 {
+			return false
+		}
 
-        if isIncreasing && curr >= next || !isIncreasing && curr <= next {
-            return false
-        }
-    }
+		if isIncreasing && curr >= next || !isIncreasing && curr <= next {
+			return false
+		}
+	}
 
-    return true
+	return true
 }
 
 func main() {
-	file, osErr := os.Open("input.txt")
+	file, osErr := os.Open("../input.txt")
 
 	if osErr != nil {
 		fmt.Print(osErr)
@@ -52,7 +52,7 @@ func main() {
 		intNums := make([]int, len(lineNums))
 
 		for i, num := range lineNums {
-			intNums[i],_ = strconv.Atoi(num)
+			intNums[i], _ = strconv.Atoi(num)
 		}
 
 		numbers = append(numbers, intNums)
@@ -61,9 +61,19 @@ func main() {
 	var safeLines int
 	for i := 0; i < len(numbers); i++ {
 		line := numbers[i]
-
 		if isValidLine(line) {
 			safeLines++
+		} else {
+			for j := 0; j < len(line); j++ {
+				c := make([]int, len(line))
+				copy(c, line)
+
+				c = append(c[:j], c[j+1:]...)
+				if isValidLine(c) {
+					safeLines++
+					break
+				}
+			}
 		}
 	}
 	fmt.Println(safeLines)
